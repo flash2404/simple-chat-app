@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Socket.io Chat App</title>
+  <title>CHAT APP</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-  <ul id="messages"></ul>
-  <form id="form" action="">
-    <input id="input" autocomplete="off" /><button>Send</button>
-  </form>
-
+  <div class="chat-container">
+    <div class="chat">
+      <div class="chat-header">
+        <i class="fas fa-arrow-left"></i>
+        <i class="fas fa-video"></i>
+      </div>
+      <div class="chat-messages">
+        <ul id="messages">
+          <!-- Chat messages -->
+        </ul>
+      </div>
+      <div class="chat-input">
+        <form id="form" action="">
+          <input id="input" type="text" placeholder="Message..." autocomplete="off" />
+          <button><img src="send-arrow.png" alt="Send"></button>
+        </form>
+      </div>
+    </div>
+  </div>
   <script src="/socket.io/socket.io.js"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(function () {
-      const socket = io();
-
-      $('form').submit(function () {
-        socket.emit('chat message', $('#input').val());
-        $('#input').val('');
-        return false;
-      });
-
-      socket.on('chat message', function (msg) {
-        $('#messages').append($('<li>').text(msg));
-      });
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
+
+
+
+
+
