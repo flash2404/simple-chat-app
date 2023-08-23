@@ -93,7 +93,7 @@ body {
 
 .message-timestamp {
   font-size: 10px;
-  color: #aaa;
+  color: #000000;
   text-align: right;
 }
 
@@ -102,15 +102,16 @@ body {
   padding: 15px;
   display: flex;
   align-items: center;
-  background-color: #ffffff;
-  border-top: 1px solid #ffffff;
+  background-color: #000;
+  border-top: 1px solid #111;
 }
 
 #input {
   flex: 1;
-  padding: 12px;
+  width: 100%; /* Increase the width to 100% */
+  padding: 14px;
   border: none;
-  border-radius: 20px;
+  border-radius: 30px;
   margin-right: 10px;
   background-color: #222;
   font-size: 16px;
