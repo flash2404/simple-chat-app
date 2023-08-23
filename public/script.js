@@ -68,7 +68,32 @@ function replaceKeywordsWithEmojis(message) {
       message = message.replace(caseInsensitiveKeyword, emoji);
     }
   }
-
+  const slashCommands = {
+    "/clear": {
+      description: "Clear all messages",
+      execute: () => {
+        while (messages?.firstChild) {
+          messages.removeChild(messages.firstChild);
+        }
+      },
+    },
+  
+    "/random": {
+      description: "Generate a random number",
+      execute: () => {
+        const randomNumber = Math.floor(Math.random() * 100000);
+        addClientOnlyMessageToChat(
+          `🧑‍🏫 Your random number is ${randomNumber} (only you can view this message)`
+        );
+      },
+    },
+  };
+  
+  // Handle slash commands
+  if (message in slashCommands) {
+    slashCommands[message].execute();
+    return scrollToBottom();
+  }
   return message;
 }
 
