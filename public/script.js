@@ -1,8 +1,13 @@
 const socket = io();
-
+// Get DOM elements
 const form = document.getElementById('form');
 const input = document.getElementById('input');
 const messages = document.getElementById('messages');
+const nicknameHeader = document.getElementById('nickname-header');
+const onlineCount = document.getElementById('online-count');
+
+let nickname = prompt('Enter your nickname:');
+nicknameHeader.textContent = `Welcome, ${nickname}`;
 
 form.addEventListener('submit', function(event) {
   event.preventDefault();
@@ -14,7 +19,10 @@ form.addEventListener('submit', function(event) {
 });
 
 socket.on('chat message', function(data) {
-  addMessage('User', data, false); // Assuming 'User' is the sender for received messages
+  addMessage(nickname,data.message, false); // Assuming 'User' is the sender for received messages
+});
+socket.on('user count', function(count) {
+  document.getElementById('online-count').textContent = count;
 });
 
 function addMessage(sender, message, isSent) {

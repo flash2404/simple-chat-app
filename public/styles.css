@@ -144,7 +144,23 @@ body {
   gap: 0.5rem;
   }
 
-
+  .online-users {
+    font-size: 14px;
+    color: #aaa;
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid #111;
+  }
+  /* Chat header */
+  .chat-header {
+    background-color: #df01cc;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #111;
+    color: #000000;
+  }
 
 
 

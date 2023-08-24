@@ -8,6 +8,7 @@
   <div class="chat-container">
     <div class="chat">
       <div class="chat-header">
+        <h3 id="nickname-header"></h3> <!-- Display nickname here -->
         <i class="fas fa-arrow-left"></i>
         <i class="fas fa-video"></i>
       </div>
@@ -18,10 +19,13 @@
       </div>
       <div class="chat-input">
         <form id="form" action="">
-          <input id="input" type="text" placeholder="Message..." autocomplete="off" /><button id="send-button"><img src="send-arrow.png" alt="Send"></button>
-          
+          <input id="input" type="text" placeholder="Message..." autocomplete="off" />
+          <button id="send-button"><img src="send-arrow.png" alt="Send"></button>
         </form>
       </div>
+      <div class="online-users">
+        Online Users: <span id="online-count">0</span>
+      </div>  
     </div>
   </div>
   <script src="/socket.io/socket.io.js"></script>
