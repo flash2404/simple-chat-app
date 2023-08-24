@@ -162,6 +162,17 @@ body {
     color: #000000;
   }
 
+/* System message */
+  .message-system {
+    text-align: center;
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 10px;
+  }
+ 
+
+
+
 
 
 

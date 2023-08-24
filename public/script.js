@@ -12,8 +12,10 @@ nicknameHeader.textContent = `Welcome, ${nickname}`;
 form.addEventListener('submit', function(event) {
   event.preventDefault();
   const message = input.value.trim();
-  if (message) {
-    socket.emit('chat message', message); // Emit the message content
+  if (message.startsWith('/')) {
+    handleSlashCommand(message);
+  } else if (message) {
+    socket.emit('chat message', message);
     input.value = '';
   }
 });
@@ -76,34 +78,58 @@ function replaceKeywordsWithEmojis(message) {
       message = message.replace(caseInsensitiveKeyword, emoji);
     }
   }
-  const slashCommands = {
-    "/clear": {
-      description: "Clear all messages",
-      execute: () => {
-        while (messages?.firstChild) {
-          messages.removeChild(messages.firstChild);
-        }
-      },
-    },
-  
-    "/random": {
-      description: "Generate a random number",
-      execute: () => {
-        const randomNumber = Math.floor(Math.random() * 100000);
-        addClientOnlyMessageToChat(
-          `🧑‍🏫 Your random number is ${randomNumber} (only you can view this message)`
-        );
-      },
-    },
-  };
-  
-  // Handle slash commands
-  if (message in slashCommands) {
-    slashCommands[message].execute();
-    return scrollToBottom();
-  }
   return message;
+}  
+
+// Handle slash commands
+function handleSlashCommand(message) {
+  if (message === '/random') {
+    const randomNumber = Math.floor(Math.random() * 1000000000000); // Generate a random number between 0 and 99
+    addSystemMessage(`🤖 System: The random number is ${randomNumber}`);
+  } else if (message === '/clear') {
+    clearMessages();
+  } else if (message === '/help') {
+    showHelpMessage()  
+  } else {
+    addMessage('You', command, true);
+  }
+  
 }
+function showHelpMessage() {
+  const helpText = `
+    🤖 System: Slash Commands:
+    /random - Generate a random number
+    /clear - Clear all messages
+    /help - Show this help message
+  `;
+  addMessage('System', helpText, false);
+}
+// Add a system message to the chat
+function addSystemMessage(message) {
+  const messageElement = document.createElement('li');
+  messageElement.classList.add('message-system');
+
+  const contentElement = document.createElement('div');
+  contentElement.classList.add('message-content');
+  contentElement.innerText = message;
+
+  messageElement.appendChild(contentElement);
+  messages.appendChild(messageElement);
+
+  messages.scrollTop = messages.scrollHeight;
+}
+
+// Clear all messages
+function clearMessages() {
+  messages.innerHTML = '';
+}
+
+
+
+ 
+  
+
+
 
 
 
